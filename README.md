@@ -28,17 +28,42 @@ Next state of D flip-flop is always equal to data input, D for every positive tr
 
 **Procedure**
 
-/* write all the steps invloved */
+Start the module with inputs: d, clk, rst (optional reset).
+
+Declare output: q.
+
+Use assign or special modeling for dataflow (but dataflow alone can't directly describe clock edges).
+
+Model behavior using clock gating (not ideal — usually behavioral modeling is better for edge detection).
+
+If reset is active, output q = 0.
+
+Otherwise, output q = d (transfer input to output).
+
+Express this logic using a conditional (ternary) operator (? :).
+
+End the module.
+
+
 
 **PROGRAM**
 
-/* Program for flipflops and verify its truth table in quartus using Verilog programming. Developed by: RegisterNumber:
-*/
+module dflip(D,Clock,reset,Q);
+input D,reset,Clock;
+output reg Q;
+always @ (negedge Clock)
+if(!reset)
+Q <= 0;
+else
+Q <= D;
+endmodule
 
 **RTL LOGIC FOR FLIPFLOPS**
 
+![de df](https://github.com/user-attachments/assets/5876c892-7607-4076-83ac-12c0160f2e3f)
 
 **TIMING DIGRAMS FOR FLIP FLOPS**
+![de d](https://github.com/user-attachments/assets/f0743ab6-204c-4f01-9174-7208e2563105)
 
 
 **RESULTS**
